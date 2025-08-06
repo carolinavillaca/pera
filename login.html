@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Pêra+</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="header-sticky">
+        <div class="logo">
+            <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
+            <span>Pêra+</span>
+        </div>
+        <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; position: absolute; left: 50%; transform: translateX(-50%);">página de login*</span>
+    </header>
+
+    <main class="auth-page-container login-page">
+        <section class="auth-panel auth-left-panel">
+            <div class="auth-form-card">
+                <h1>Entre na sua conta</h1>
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Senha" required>
+                    <p class="small-link"><a href="#">Esqueci minha senha</a></p>
+                    
+                    <button type="submit" class="main-btn">Entrar</button>
+                </form>
+                <p class="bottom-text">Ainda não tem uma conta? <a href="cadastro.html">Crie uma agora.</a></p>
+            </div>
+        </section>
+
+        <section class="auth-panel auth-right-panel">
+            <div class="auth-gradient-bg">
+                <h1>Que bom te ver de volta!</h1>
+                <p>O filme perfeito para o seu momento está a um clique de distância.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pêra+ | Chega de procurar. Comece a assistir.</title>
+    <link rel="stylesheet" href="naoassinante.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="header-sticky">
+        <div class="logo">
+            <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
+            <span>Pêra+</span>
+        </div>
+        <a href="cadastro.html" class="btn-primary">Assine já</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Chega de procurar. Comece a assistir.</h1>
+                <p><b>Seu próximo filme favorito a um toque de distância. Sem estresse.</b></p>
+                <div class="email-form">
+                    <p>Pronto para parar de escolher e começar a curtir? Informe seu e-mail para se cadastrar.</p>
+                    <form onsubmit="redirecionar(event)">
+                        <input type="email" placeholder="Email..." required id="email">
+                        <button type="submit" class="btn-secondary">Comece já</button>
+                    </form>
+                </div>
+                
+                <script>
+                    function redirecionar(event) {
+                        event.preventDefault(); // Impede o envio tradicional do formulário
+                
+                        const email = document.getElementById('email').value;
+                
+                        if (email) {
+                            // Você pode também enviar o e-mail para um backend aqui, se quiser.
+                            window.location.href = "cadastro.html";
+                        } else {
+                            alert("Por favor, insira um e-mail válido.");
+                        }
+                    }
+                </script>
+                
+            </div>
+        </section>
+
+        <section class="plan-banner">
+            <div class="plan-content">
+                <div class="icon-price">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="plan-text">
+                    <p><a href="#">Diferentes dos iguais. Apenas um plano. Confira.</a></p>
+                    <p>Plano acessível para todos, e o melhor: ilimitado e sem anúncios.</p>
+                </div>
+                <a href="cadastro.html" class="btn-tertiary">Saiba mais</a>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2>Em alta</h2>
+            <div class="carousel-container">
+                <button class="carousel-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track">
+                    <div class="movie-card"><img src="img/png (1)" alt="Barbie"></div>
+                    <div class="movie-card"><img src="img/png (2)" alt="Clube da Luta"></div>
+                    <div class="movie-card"><img src="img/png (3)" alt="Homem-Aranha"></div>
+                    <div class="movie-card"><img src="img/png (4)" alt="Titanic"></div>
+                    <div class="movie-card"><img src="img/png (5)" alt="O Estranho Mundo de Jack"></div>
+                    <div class="movie-card"><img src="img/png (1)" alt="Barbie"></div>
+                    <div class="movie-card"><img src="img/png (2)" alt="Clube da Luta"></div>
+                    <div class="movie-card"><img src="img/png (3)" alt="Homem-Aranha"></div>
+                    <div class="movie-card"><img src="img/png (4)" alt="Titanic"></div>
+                    <div class="movie-card"><img src="img/png (5)" alt="O Estranho Mundo de Jack"></div>
+                    <!-- Adicione mais filmes se desejar -->
+                </div>
+                <button class="carousel-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="reasons-section">
+            <h2>Mais motivos para assinar</h2>
+            <div class="reasons-grid">
+                <div class="reason-card border-blue">
+                    <h3>Escolha em segundos</h3>
+                    <p>Diga seu humor e quanto tempo você tem. A gente te dá a sugestão perfeita. Simples assim.</p>
+                </div>
+                <div class="reason-card border-green">
+                    <h3>Um plano, sem drama</h3>
+                    <p>Um valor que cabe no bolso. Tudo ilimitado, sem anúncios e sem surpresas na fatura. Feito pra você.</p>
+                </div>
+                <div class="reason-card border-yellow">
+                    <h3>Baixe e dê o play</h3>
+                    <p>Vai viajar ou ficar sem net? Baixe seus favoritos com um toque e curta de qualquer lugar.</p>
+                </div>
+                <div class="reason-card border-purple">
+                    <h3>Assista onde estiver</h3>
+                    <p>No celular, no tablet, na sua TV. A Pêra+ vai com você. Continue o que estava vendo, sem interrupções.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>Sem enrolação. Suas dúvidas respondidas.</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>O que é a Pêra+?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>A Pêra+ é uma plataforma de streaming que oferece um vasto catálogo de filmes e séries por um preço único. Nosso diferencial é a simplicidade e a curadoria de conteúdo para que você passe menos tempo procurando e mais tempo assistindo.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Quanto custa a assinatura?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oferecemos um plano único, ilimitado e sem anúncios. Clique em "Assine já" ou "Saiba mais" para conferir o valor atualizado e as condições.</p>
+                    </div>
+                </div>
+                 <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Como funciona a escolha rápida?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nossa funcionalidade de escolha rápida permite que você insira seu humor, o tempo disponível e seus gêneros preferidos para receber uma sugestão de filme personalizada instantaneamente. É o fim da indecisão!</p>
+                    </div>
+                </div>
+                <div class="faq-item open">
+                    <button class="faq-question">
+                        <span>Posso cancelar quando quiser?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Claro. Sem burocracia ou multa. Você cancela online, em poucos cliques. A gente quer que você fique porque gosta, não porque está preso a um contrato.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
+                    <span>Pêra+</span>
+                </div>
+                <p class="slogan">Escolha rápido. Curta melhor.</p>
+            </div>
+    
+           
+            <nav class="footer-links">
+                <ul>
+                    <li><a href="ajuda.html">Central de Ajuda</a></li>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Privacidade</a></li>
+                    <li><a href="sobre.html">Sobre a Pêra+</a></li>
+                </ul>
+            </nav>
+                
+            <div class="footer-actions">
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <button class="lang-selector">
+                    <i class="fas fa-globe"></i>
+                    <span>Português</span>
+                </button>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2025 Pêra+. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="naoassinante.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Pêra+</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="header-sticky">
+        <div class="logo">
+            <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
+            <span>Pêra+</span>
+        </div>
+        <!-- O texto "página de cadastro*" é apenas visual na imagem, não adicionaremos funcionalidade para ele -->
+        <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; position: absolute; left: 50%; transform: translateX(-50%);">página de cadastro*</span>
+    </header>
+
+    <main class="auth-page-container register-page">
+        <section class="auth-panel auth-left-panel">
+            <div class="auth-gradient-bg">
+                <h1>O fim da rolagem infinita começa agora.</h1>
+                <p>Crie sua conta e entre para o clube de quem valoriza o próprio tempo. Faltam só alguns segundos.</p>
+            </div>
+        </section>
+
+        <section class="auth-panel auth-right-panel">
+            <div class="auth-form-card">
+                <h1>Crie sua conta</h1>
+                <form id="signupForm">
+                    <input type="text" id="name" placeholder="Como podemos te chamar?" required>
+                    <input type="email" id="email" placeholder="Insira o seu melhor email" required>
+                    <input type="password" id="password" placeholder="Crie uma senha" required>
+                    <p class="input-info">Capriche na senha: use no mínimo 8 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos.</p>
+                    <input type="password" id="confirmPassword" placeholder="Confirmação da senha" required>
+                    
+                    <p class="input-info">Ao continuar, você concorda com nossos <a href="termos.html">Termos de Uso</a> e <a href="privacidade.html">Política de Privacidade</a>.</p>
+                    
+                    <button type="submit" class="main-btn">Avançar</button>
+                </form>
+                <p class="bottom-text">Já tem uma conta? <a href="login.html">Entre aqui</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
