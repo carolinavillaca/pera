@@ -1,71 +1,82 @@
-document.addEventListener('DOMContentLoaded', () => {
+const YOUTUBE_API_KEY = '';
 
-    // --- LÓGICA DO CARROSSEL DE DESTAQUE ---
-    const slides = document.querySelectorAll('.hero-carousel .slide');
-    const prevBtn = document.querySelector('.hero-carousel .prev');
-    const nextBtn = document.querySelector('.hero-carousel .next');
-    let currentIndex = 0;
+async function buscarVideosYouTube(termo) {
+    const endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(termo)}&key=${YOUTUBE_API_KEY}`;
+    try {
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        return data.items;
+    } catch (error) {
+        console.error('Erro ao buscar vídeos do YouTube:', error);
+        return [];
+    }
+}
+buscarVideosYouTube('lofi').then(videos => console.log(videos));
 
-    function showSlide(index) {
-        // Esconde todos os slides
-        slides.forEach(slide => slide.classList.remove('active'));
-        
-        // Garante que o índice seja cíclico
-        if (index >= slides.length) {
-            currentIndex = 0;
-        } else if (index < 0) {
-            currentIndex = slides.length - 1;
-        } else {
-            currentIndex = index;
+function renderizarCardsYoutube(videos, containerSelector) {
+    const container = document.querySelector(containerSelector);
+    container.innerHTML = ''; 
+    videos.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `
+            <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
+            <div class="card-overlay">
+                <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
+                    <button class="btn-play">Assista agora</button>
+                </a>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+buscarVideosYouTube('filme romance trailer').then(videos => {
+    renderizarCardsYoutube(videos, '#romances-row');
+});
+buscarVideosYouTube('filme infantil trailer desenho').then(videos => {
+    renderizarCardsYoutube(videos, '#infantil-row');
+});
+
+function renderizarSlidesComAPI(videos, containerSelector) {
+    const container = document.querySelector(containerSelector);
+    container.innerHTML = '';
+    videos.forEach((video, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide' + (i === 0 ? ' active' : '');
+        slide.style.backgroundImage = `url('${video.snippet.thumbnails.high.url}')`;
+        slide.innerHTML = `
+            <div class="slide-content">
+                <h1>${video.snippet.title}</h1>
+                <p>${video.snippet.description ? video.snippet.description.substring(0, 100) + '...' : ''}</p>
+                <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank" class="btn-play">Assista agora</a>
+            </div>
+        `;
+        container.appendChild(slide);
+    });
+}
+
+buscarVideosYouTube('ação trailer').then(videos => {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((slide, i) => {
+        if(videos[i]) {
+            slide.style.backgroundImage = `url('${videos[i].snippet.thumbnails.high.url}')`;
+            slide.querySelector('h1').textContent = videos[i].snippet.title;
+            slide.querySelector('p').textContent = videos[i].snippet.description.substring(0, 100) + '...';
         }
-
-        // Mostra o slide correto
-        slides[currentIndex].classList.add('active');
-    }
-
-    if (slides.length > 0) {
-        // Event listeners para os botões
-        nextBtn.addEventListener('click', () => {
-            showSlide(currentIndex + 1);
-        });
-
-        prevBtn.addEventListener('click', () => {
-            showSlide(currentIndex - 1);
-        });
-
-        // Troca automática de slide (opcional)
-        setInterval(() => {
-            showSlide(currentIndex + 1);
-        }, 5000); // Muda a cada 5 segundos
-
-        // Mostra o primeiro slide ao carregar
-        showSlide(currentIndex);
-    }
-
-
-    // --- LÓGICA DOS BOTÕES DE HUMOR ---
-    const moodBtns = document.querySelectorAll('.mood-btn');
-
-    moodBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove a classe 'active' de todos os botões
-            moodBtns.forEach(otherBtn => otherBtn.classList.remove('active'));
-            // Adiciona a classe 'active' apenas no botão clicado
-            btn.classList.add('active');
-        });
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA DO CARROSSEL DE DESTAQUE (JÁ EXISTENTE) ---
+    // carrossel
     const slides = document.querySelectorAll('.hero-carousel .slide');
     const prevBtn = document.querySelector('.hero-carousel .prev');
     const nextBtn = document.querySelector('.hero-carousel .next');
     let currentIndex = 0;
 
     function showSlide(index) {
-        if (!slides || slides.length === 0) return; // Garante que o carrossel exista na página
+        if (!slides || slides.length === 0) return; 
         slides.forEach(slide => slide.classList.remove('active'));
         
         if (index >= slides.length) {
@@ -86,9 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- LÓGICA DOS BOTÕES DE HUMOR (JÁ EXISTENTE) ---
+    //botões humor
     const moodBtns = document.querySelectorAll('.mood-btn');
-    if (moodBtns) { // Garante que os botões existam na página
+    if (moodBtns) { 
         moodBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 moodBtns.forEach(otherBtn => otherBtn.classList.remove('active'));
@@ -97,20 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA PARA FORMULÁRIOS DE AUTENTICAÇÃO ---
 
-    // Formulário de Cadastro
+    // formulário de cadastro
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
         signupForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o envio padrão do formulário
+            e.preventDefault();
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Validação simples (apenas para demonstração)
             if (name === "" || email === "" || password === "" || confirmPassword === "") {
                 alert("Por favor, preencha todos os campos.");
                 return;
@@ -125,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Simula um cadastro bem-sucedido
             alert("Cadastro realizado com sucesso! Redirecionando para seleção de perfil...");
-            window.location.href = 'perfis.html'; // Redireciona para a página de perfis
+            window.location.href = 'perfis.html'; 
         });
     }
 
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o envio padrão do formulário
+            e.preventDefault();
 
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
@@ -143,24 +152,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-            // Simula um login bem-sucedido
             alert("Login efetuado! Redirecionando para seleção de perfil...");
-            window.location.href = 'perfis.html'; // Redireciona para a página de perfis
+            window.location.href = 'perfis.html'; 
         });
     }
 
-    // --- LÓGICA PARA SELEÇÃO DE PERFIL ---
+    // seleção de perfil
     const profileItems = document.querySelectorAll('.profile-item');
     if (profileItems.length > 0) {
         profileItems.forEach(item => {
             item.addEventListener('click', () => {
-                const profileName = item.dataset.profile; // Pega o nome do perfil do atributo data-profile
+                const profileName = item.dataset.profile; 
                 if (profileName === "Gerenciar perfis") {
                     alert("Redirecionando para gerenciamento de perfis (funcionalidade futura)...");
-                    // Aqui você redirecionaria para uma página de gerenciamento real
                 } else {
                     alert(`Bem-vindo(a), ${profileName}! Carregando sua experiência...`);
-                    window.location.href = 'index.html'; // Redireciona para a página principal
+                    window.location.href = 'index.html';
                 }
             });
         });
