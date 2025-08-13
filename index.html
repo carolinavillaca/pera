@@ -12,12 +12,24 @@
     <header class="header-sticky">
         <div class="logo">
             <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
-            <span>Pêra+</span>
+            <span class="logo-text">Pêra+</span>
+        </div>
+
+        <!-- BARRA DE PESQUISA -->
+        <div class="search-bar-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="Buscar por títulos...">
+        </div>
+        
+        <!-- FOTO DE PERFIL COM ID PARA JS -->
+        <div class="header-profile">
+            <!-- A imagem padrão pode ser qualquer uma, o JS vai trocar -->
+            <img src="img/malu.png" alt="Foto do Perfil" id="header-profile-img" class="header-profile-img">
         </div>
     </header>
 
     <main>
-        <!-- carrossel destaque -->
+        <!-- 1. CARROSSEL DE DESTAQUE -->
         <section class="hero-carousel">
             <div class="carousel-container">
                 <div class="slide active">
@@ -43,8 +55,8 @@
             <button class="carousel-arrow next"><i class="fas fa-chevron-right"></i></button>
         </section>
 
-        <!-- filtro de humor -->
-        <section class="mood-filter">
+        <!-- 2. FILTRO DE HUMOR -->
+        <section class="mood-filter" data-title="Filtro de Humor">
             <h2><span class="gradient-text">No clima de...?</span></h2>
             <div class="mood-buttons">
                 <button class="mood-btn">Preciso rir</button>
@@ -55,7 +67,7 @@
             </div>
         </section>
 
-        <!-- filmes -->
+        <!-- 3. SEÇÕES DE FILMES COM DATA-TITLE PARA BUSCA -->
         <section class="movie-section" id="romances-section">
             <h2>Romances</h2>
             <div class="movie-row" id="romances-row">
@@ -74,7 +86,7 @@
             <div class="footer-brand">
                 <div class="logo">
                     <img src="img/icon.jpeg" alt="Logo Pêra+" class="logo-icon">
-                    <span>Pêra+</span>
+                    <span class="logo-text">Pêra+</span>
                 </div>
                 <p class="slogan">Escolha rápido. Curta melhor.</p>
             </div>
