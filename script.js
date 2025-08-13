@@ -1,21 +1,28 @@
-const YOUTUBE_API_KEY = '';
+const YOUTUBE_API_KEY = 'AIzaSyCJBptdB9ow8_X3EzVfdkhwhqJ8z2ryFrM';
 
 async function buscarVideosYouTube(termo) {
     const endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(termo)}&key=${YOUTUBE_API_KEY}`;
     try {
         const response = await fetch(endpoint);
         const data = await response.json();
+
+        if (!data.items) {
+            console.error('Erro na API do YouTube:', data.error?.message || data);
+            return [];
+        }
+
         return data.items;
     } catch (error) {
         console.error('Erro ao buscar vídeos do YouTube:', error);
         return [];
     }
 }
+
 buscarVideosYouTube('lofi').then(videos => console.log(videos));
 
 function renderizarCardsYoutube(videos, containerSelector) {
     const container = document.querySelector(containerSelector);
-    container.innerHTML = ''; 
+    container.innerHTML = '';
     videos.forEach(video => {
         const card = document.createElement('div');
         card.className = 'movie-card';
@@ -34,6 +41,7 @@ function renderizarCardsYoutube(videos, containerSelector) {
 buscarVideosYouTube('filme romance trailer').then(videos => {
     renderizarCardsYoutube(videos, '#romances-row');
 });
+
 buscarVideosYouTube('filme infantil trailer desenho').then(videos => {
     renderizarCardsYoutube(videos, '#infantil-row');
 });
@@ -96,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showSlide(currentIndex);
     }
 
-
     //botões humor
     const moodBtns = document.querySelectorAll('.mood-btn');
     if (moodBtns) { 
@@ -158,19 +165,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // seleção de perfil
-    const profileItems = document.querySelectorAll('.profile-item');
-    if (profileItems.length > 0) {
-        profileItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const profileName = item.dataset.profile; 
-                if (profileName === "Gerenciar perfis") {
-                    alert("Redirecionando para gerenciamento de perfis (funcionalidade futura)...");
+
+// --- LÓGICA DE PERFIS, HEADER E PESQUISA ---
+
+// 1. Seleção de perfil e redirecionamento (para perfis.html)
+const profileItems = document.querySelectorAll('.profile-item');
+if (profileItems.length > 0) {
+    profileItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const profileImgSrc = item.getAttribute('data-img-src');
+            const profileName = item.dataset.profile; 
+
+            if (profileImgSrc) { // Se for um perfil clicável com imagem
+                localStorage.setItem('selectedProfileImg', profileImgSrc);
+                window.location.href = 'index.html';
+            } else if (profileName === "Gerenciar perfis") {
+                alert("Redirecionando para gerenciamento de perfis (funcionalidade futura)...");
+            }
+        });
+    });
+}
+
+// 2. Exibição do perfil salvo no header (para index.html)
+const headerProfileImg = document.getElementById('header-profile-img');
+if (headerProfileImg) {
+    const savedProfileImg = localStorage.getItem('selectedProfileImg');
+    if (savedProfileImg) {
+        headerProfileImg.src = savedProfileImg;
+    }
+}
+
+// 3. Funcionalidade da Barra de Pesquisa (para index.html)
+const searchInput = document.getElementById('search-input');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        
+        document.querySelectorAll('.movie-section').forEach(section => {
+            let sectionHasVisibleMovies = false;
+            
+            section.querySelectorAll('.movie-card').forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    sectionHasVisibleMovies = true;
                 } else {
-                    alert(`Bem-vindo(a), ${profileName}! Carregando sua experiência...`);
-                    window.location.href = 'index.html';
+                    card.style.display = 'none';
                 }
             });
-        });
-    }
 
+            if (sectionHasVisibleMovies) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    });
+}
 });
