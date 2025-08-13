@@ -1,4 +1,4 @@
-const YOUTUBE_API_KEY = 'AIzaSyCJBptdB9ow8_X3EzVfdkhwhqJ8z2ryFrM';
+const YOUTUBE_API_KEY = '';
 
 async function buscarVideosYouTube(termo) {
     const endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(termo)}&key=${YOUTUBE_API_KEY}`;
